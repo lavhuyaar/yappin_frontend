@@ -9,8 +9,20 @@ import MessageInput from "../components/MessageInput";
 import type { IChat } from "../interfaces";
 import { formatTime } from "../utils/formatTime";
 import ChatSkeleton from "../components/skeletons/ChatSkeleton";
+import { IoArrowBack } from "react-icons/io5";
+import { SECTIONS_TO_SHOW } from "../constants";
 
-const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
+interface IChatSectionProps {
+  receiverId: string | null;
+  goBackFromSelectedChat: VoidFunction;
+  sectionToShow: "chats-list" | "chatBox";
+}
+
+const ChatSection = ({
+  receiverId,
+  goBackFromSelectedChat,
+  sectionToShow,
+}: IChatSectionProps) => {
   const [chat, setChat] = useState<IChat | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | undefined>("");
@@ -36,8 +48,10 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
   // Default section (no chats selected)
   if (!receiverId) {
     return (
-      <section className="bg-bg-surface/5 w-2/3 h-[80vh] flex flex-col items-center justify-center">
-        <img src="/yappin-logo.png" alt="Yappin" width={600} />
+      <section
+        className={`w-full hidden md:flex md:w-2/3 h-[80vh] flex-col items-center justify-center`}
+      >
+        <img src="/yappin-logo.png" alt="Yappin" width={400} />
         <h3 className="text-2xl text-primary">Yap the way you want!</h3>
       </section>
     );
@@ -51,7 +65,11 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
   // Error
   if (error) {
     return (
-      <section className="bg-bg-surface/5 w-2/3 h-[80vh] flex flex-col items-center justify-center">
+      <section
+        className={`${
+          sectionToShow === SECTIONS_TO_SHOW.CHAT_BOX ? "flex" : "hidden"
+        } w-full md:flex md:w-2/3 h-[80vh] flex-col items-center justify-center`}
+      >
         <h3 className="text-center text-xl text-red-600">{error}</h3>
         <button
           onClick={getChat}
@@ -59,15 +77,30 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
         >
           Retry
         </button>
+        <button
+          onClick={goBackFromSelectedChat}
+          className="md:hidden mt-2 text-md cursor-pointer font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
+        >
+          Go back to chats
+        </button>
       </section>
     );
   }
 
   return (
-    <section className="w-2/3 h-full bg-surface/5 border-2 border-surface rounded-md">
+    <section
+      className={`${
+        sectionToShow === SECTIONS_TO_SHOW.CHAT_BOX ? "block" : "hidden"
+      } w-full md:block md:w-2/3 h-full bg-surface/5 border-2 border-surface rounded-md`}
+    >
       {chat && (
         <>
           <div className="flex gap-3 items-center p-2 bg-surface w-full">
+            <IoArrowBack
+              onClick={goBackFromSelectedChat}
+              className="text-xl md:hidden"
+              title="Back to chats"
+            />
             <img
               className="!size-[60px] rounded-full shrink-0 m-1 bg-background object-cover object-center"
               src={chat?.users[0]?.profilePicture ?? "/blank-pfp.webp"}
@@ -93,14 +126,14 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
               ? chat.messages.map((message) => (
                   <div
                     key={message?.id}
-                    className={`w-1/2 flex gap-3 items-start ${
+                    className={`w-5/6 md:w-1/2 flex gap-3 items-start ${
                       message?.sender?.id === receiverId
                         ? "self-start flex-row"
                         : "self-end flex-row-reverse"
                     }`}
                   >
                     <img
-                      className="!size-[30px] rounded-full shrink-0 bg-background object-cover object-center"
+                      className="!size-[30px] mt-1 rounded-full shrink-0 bg-background object-cover object-center"
                       src={chat?.users[0]?.profilePicture ?? "/blank-pfp.webp"}
                     />
                     <div

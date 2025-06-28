@@ -1,8 +1,10 @@
 import { Route, Routes } from "react-router";
+
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Chats from "../pages/Chats";
+import Users from "../pages/Users";
 import PageNotFound from "../pages/PageNotFound";
 
 const AppRoutes = () => {
@@ -12,6 +14,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/chats" element={<Chats />} />
+      <Route path="/users" element={<Users />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

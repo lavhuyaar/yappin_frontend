@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useSearchParams } from "react-router";
 
 import useChats from "../hooks/useChats";
@@ -10,10 +10,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatSection from "../sections/ChatSection";
 
+import { SECTIONS_TO_SHOW } from "../constants";
+
 const Chats = () => {
   const { userData } = useAuth();
   const { chats } = useChats();
   const navigate = useNavigate();
+
+  const [sectionToShow, setSectionToShow] = useState<"chats-list" | "chatBox">(
+    SECTIONS_TO_SHOW.CHATS_LISTS
+  );
 
   const [searchParams, setSearchParams] = useSearchParams();
   const receiverId: string | null = searchParams.get("with");
@@ -29,13 +35,27 @@ const Chats = () => {
     const params = new URLSearchParams();
     params.set("with", receiverId);
     setSearchParams(params);
+    setSectionToShow(SECTIONS_TO_SHOW.CHAT_BOX);
+  };
+
+  // Navigates User back to chats list section (in Mobile viewport)
+  const goBackFromSelectedChat = () => {
+    setSearchParams((state) => {
+      state.delete("with");
+      return state;
+    });
+    setSectionToShow(SECTIONS_TO_SHOW.CHATS_LISTS);
   };
 
   return (
     <>
       <Header />
-      <main className="!flex-row mx-auto text-text-primary p-6 gap-3">
-        <section className="w-1/3 h-full">
+      <main className="!flex-row mx-auto text-text-primary p-3 pt-6 md:p-6 gap-3">
+        <section
+          className={`w-full ${
+            sectionToShow === SECTIONS_TO_SHOW.CHATS_LISTS ? "block" : "hidden"
+          } w-full md:block md:w-1/3 h-full`}
+        >
           <h2 className="text-3xl text-primary mb-4">Chats</h2>
           {chats && chats?.length > 0 ? (
             chats.map((chat) => (
@@ -91,7 +111,11 @@ const Chats = () => {
           )}
         </section>
 
-        <ChatSection receiverId={receiverId} />
+        <ChatSection
+          receiverId={receiverId}
+          sectionToShow={sectionToShow}
+          goBackFromSelectedChat={goBackFromSelectedChat}
+        />
       </main>
       <Footer />
     </>

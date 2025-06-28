@@ -11,6 +11,7 @@ interface IUserData {
   firstName: string;
   lastName: string;
   username: string;
+  profilePicture?: string;
 }
 
 interface IAuthValues {
