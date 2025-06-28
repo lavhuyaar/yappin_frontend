@@ -88,3 +88,7 @@ main {
 .chat::-webkit-scrollbar-thumb {
   background: rgb(var(--primary-hover) / 0.2);
 }
+
+.message-input::-webkit-scrollbar {
+  width: 0px;
+}

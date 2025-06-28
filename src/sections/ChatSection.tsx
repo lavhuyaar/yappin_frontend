@@ -64,7 +64,7 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
   }
 
   return (
-    <section className="w-2/3 h-full bg-surface/5">
+    <section className="w-2/3 h-full bg-surface/5 border-2 border-surface rounded-md">
       {chat && (
         <>
           <div className="flex gap-3 items-center p-2 bg-surface w-full">
@@ -88,7 +88,7 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
             />
           </div>
 
-          <div className="flex flex-col w-full h-[500px] gap-2 py-5 px-2 overflow-y-auto chat">
+          <div className="flex flex-col w-full h-[50vh] gap-2 py-5 px-2 overflow-y-auto chat">
             {chat?.messages.length > 0
               ? chat.messages.map((message) => (
                   <div

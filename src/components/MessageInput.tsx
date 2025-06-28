@@ -59,12 +59,12 @@ const MessageInput: React.FC<IMessageInputProps> = ({
   // };
 
   return (
-    <div className="flex w-full items-start gap-4 mt-10 justify-end p-2">
+    <div className="flex w-full items-start gap-4 mt-10 justify-end p-2 mb-4">
       <div className="w-full flex flex-col">
         <textarea
           name="message"
           id="message"
-          className="text-text-primary border-2 border-primary-hover/10 rounded-md w-full p-2 min-h-[100px] resize-none focus:outline-none"
+          className="text-text-primary border-2 border-primary-hover/10 rounded-md w-full p-2 min-h-[100px] resize-none focus:outline-none message-input"
           onChange={textAreaOnChange}
           // onKeyDown={onPressEnter}
           disabled={submitting}
