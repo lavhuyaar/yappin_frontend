@@ -48,7 +48,7 @@ const Register = () => {
   return (
     <>
       <Header />
-      <main className="p-6 sm:px-[5%] py-10 gap-5 items-center justify-center">
+      <main className="p-6 sm:px-[5%] py-10 gap-5 items-center justify-center text-text-primary">
         <h1 className="text-[26px] text-center font-semibold">
           Register @Yappin
         </h1>

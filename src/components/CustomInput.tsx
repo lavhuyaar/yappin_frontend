@@ -26,7 +26,7 @@ const CustomInput: React.FC<ICustomInput> = ({
         <input
           autoComplete="off"
           defaultValue={value}
-          className="border-text-primary/10 focus:outline-none align-middle border rounded-md px-3 py-2"
+          className="border-text-primary/10 text-text-primary/60 focus:outline-none align-middle border rounded-md px-3 py-2"
           {...register(name, { required: true })}
           type={type}
           placeholder={placeholder}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -23,11 +23,18 @@ interface ILoginFormValues {
 const Login = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const { userData, setUserData, logoutUser } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginFormValues>({ resolver: yupResolver(loginSchema) });
+
+  useEffect(() => {
+    if (userData) {
+      navigate("/chats", { replace: true });
+    }
+  }, [userData, navigate]);
 
   const onSubmit: SubmitHandler<ILoginFormValues> = async (values) => {
     setSubmitting(true);
@@ -50,10 +57,10 @@ const Login = () => {
   return (
     <>
       <Header />
-      <main className="p-6 sm:px-[5%] py-10 gap-5 items-center justify-center">
+      <main className="p-6 sm:px-[5%] py-10 gap-5 items-center justify-center text-text-primary">
         {userData ? (
           <div className="bg-surface p-5 sm:p-8 rounded-lg flex flex-col items-center gap-3">
-            <h2 className="text-2xl text-center font-mormal">
+            <h2 className="text-2xl text-center font-normal">
               {`Hey ${userData?.firstName}, you're already logged in!`}
             </h2>
             <button

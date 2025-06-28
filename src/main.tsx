@@ -5,20 +5,23 @@ import { BrowserRouter } from "react-router";
 import { Flip, ToastContainer } from "react-toastify";
 import AppRoutes from "./routes/AppRoutes";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-        <ToastContainer
-          autoClose={1000}
-          hideProgressBar
-          theme="dark"
-          transition={Flip}
-          position="top-center"
-        />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppRoutes />
+          <ToastContainer
+            autoClose={1000}
+            hideProgressBar
+            theme="dark"
+            transition={Flip}
+            position="top-center"
+          />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>
 );
