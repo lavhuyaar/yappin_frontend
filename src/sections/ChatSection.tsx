@@ -37,7 +37,8 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
   if (!receiverId) {
     return (
       <section className="bg-bg-surface/5 w-2/3 h-[80vh] flex flex-col items-center justify-center">
-        <h3 className="text-3xl">Yappin - Yap the way you want</h3>
+        <img src="/yappin-logo.png" alt="Yappin" width={600} />
+        <h3 className="text-2xl text-primary">Yap the way you want!</h3>
       </section>
     );
   }

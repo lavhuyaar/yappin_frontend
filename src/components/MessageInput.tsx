@@ -52,11 +52,11 @@ const MessageInput: React.FC<IMessageInputProps> = ({
     }
   };
 
-  const onPressEnter = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      onSubmit();
-    }
-  };
+  // const onPressEnter = (event: React.KeyboardEvent) => {
+  //   if (event.key === "Enter") {
+  //     onSubmit();
+  //   }
+  // };
 
   return (
     <div className="flex w-full items-start gap-4 mt-10 justify-end p-2">
@@ -66,7 +66,7 @@ const MessageInput: React.FC<IMessageInputProps> = ({
           id="message"
           className="text-text-primary border-2 border-primary-hover/10 rounded-md w-full p-2 min-h-[100px] resize-none focus:outline-none"
           onChange={textAreaOnChange}
-          onKeyDown={onPressEnter}
+          // onKeyDown={onPressEnter}
           disabled={submitting}
           value={value}
         ></textarea>

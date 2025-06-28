@@ -27,7 +27,7 @@
 .dark {
   --background: 18 24 27; /* deep blue-gray */
   --surface: 30 36 40; /* surface gray-blue */
-  --primary: 94 234 212; /* bright cyan-teal */
+  --primary: 39 223 194; /* bright cyan-teal */
   --primary-hover: 126 255 235; /* light vibrant teal */
   --primary-txt: 12 18 20;
 
@@ -58,7 +58,6 @@ body {
 }
 
 #root {
-  max-width: 1800px;
   width: 100%;
   height: 100%;
   position: relative;
@@ -69,6 +68,7 @@ main {
   display: flex;
   min-height: 80vh;
   flex-direction: column;
+  max-width: 1800px;
   background-color: var(--color-background);
 }
 

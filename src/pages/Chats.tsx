@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { NavLink, useNavigate, useSearchParams } from "react-router";
 
 import useChats from "../hooks/useChats";
 import useAuth from "../hooks/useAuth";
@@ -34,7 +34,7 @@ const Chats = () => {
   return (
     <>
       <Header />
-      <main className="!flex-row text-text-primary p-6 gap-3">
+      <main className="!flex-row mx-auto text-text-primary p-6 gap-3">
         <section className="w-1/3 h-full">
           <h2 className="text-3xl text-primary mb-4">Chats</h2>
           {chats && chats?.length > 0 ? (
@@ -79,7 +79,15 @@ const Chats = () => {
               </div>
             ))
           ) : (
-            <p>No ongoing chats</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-xl">No ongoing chats</p>
+              <NavLink
+                to="/users"
+                className="text-md cursor-pointer max-w-[120px] font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
+              >
+                Find people
+              </NavLink>
+            </div>
           )}
         </section>
 
