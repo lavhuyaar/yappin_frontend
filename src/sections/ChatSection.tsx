@@ -8,14 +8,16 @@ import MessageInput from "../components/MessageInput";
 
 import type { IChat } from "../interfaces";
 import { formatTime } from "../utils/formatTime";
+import ChatSkeleton from "../components/skeletons/ChatSkeleton";
 
 const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
   const [chat, setChat] = useState<IChat | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>("");
 
   const getChat = async () => {
     setLoading(true);
+    setError(undefined);
     try {
       const response = await axiosInstance.get(`/chats/chat/${receiverId}`);
       setChat(response.data?.chat);
@@ -28,14 +30,34 @@ const ChatSection = ({ receiverId }: { receiverId: string | null }) => {
 
   useEffect(() => {
     if (!receiverId) return;
-
     getChat();
   }, [receiverId]);
 
+  // Default section (no chats selected)
   if (!receiverId) {
     return (
-      <section className="w-2/3 bg-surface h-full">
-        Yap the way you want
+      <section className="bg-bg-surface/5 w-2/3 h-[80vh] flex flex-col items-center justify-center">
+        <h3 className="text-3xl">Yappin - Yap the way you want</h3>
+      </section>
+    );
+  }
+
+  // Loading skeleton
+  if (loading) {
+    return <ChatSkeleton />;
+  }
+
+  // Error
+  if (error) {
+    return (
+      <section className="bg-bg-surface/5 w-2/3 h-[80vh] flex flex-col items-center justify-center">
+        <h3 className="text-center text-xl text-red-600">{error}</h3>
+        <button
+          onClick={getChat}
+          className="mt-2 text-md cursor-pointer font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
+        >
+          Retry
+        </button>
       </section>
     );
   }

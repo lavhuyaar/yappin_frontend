@@ -74,7 +74,7 @@ const Chats = () => {
                   )}
                 </div>
                 <p className="ml-auto text-[10px] self-start mt-1 text-end">
-                  {formatTime(chat?.updatedAt)}
+                  {formatTime(chat?.messages[0]?.createdAt)}
                 </p>
               </div>
             ))
