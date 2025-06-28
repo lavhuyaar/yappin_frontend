@@ -5,17 +5,21 @@ export interface IUser {
   profilePicture: string;
   username: string;
 }
+export interface IMessage {
+  id: string;
+  sender: IUser;
+  receiver: IUser;
+  content: string;
+  createdAt: string;
+}
 
 export interface IChat {
   id: string;
   createdAt: string;
   updatedAt: string;
-  messages: {
-    id: string;
-    sender: IUser;
-    receiver: IUser;
-    content: string;
-    createdAt: string;
-  }[];
-  users: IUser[];
+  messages: IMessage[];
+  userA: IUser;
+  userB: IUser;
+  userAId: string;
+  userBId: string;
 }

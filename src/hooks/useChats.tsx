@@ -1,41 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
-import useAuth from "./useAuth";
-
-import { axiosInstance } from "../api/axiosInstance";
-import { handleAxiosError } from "../utils/handleAxiosError";
-
-import type { IChat } from "../interfaces";
+import ChatsContext from "../context/ChatsContext";
 
 const useChats = () => {
-  const [chats, setChats] = useState<IChat[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const context = useContext(ChatsContext);
 
-  const { userData } = useAuth();
+  if (!context) throw new Error("Chats context not found!");
 
-  useEffect(() => {
-    if (!userData) return;
-
-    const getChats = async () => {
-      setLoading(true);
-      try {
-        const response = await axiosInstance.get("/chats");
-        setChats(response.data?.chats);
-      } catch (err) {
-        handleAxiosError(err, "Failed to get chats!", setError, false);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getChats();
-  }, []);
-
-  return {
-    chats,
-    loading,
-    error,
-  };
+  return context;
 };
 export default useChats;

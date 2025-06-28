@@ -34,7 +34,7 @@ const Login = () => {
     if (userData) {
       navigate("/chats", { replace: true });
     }
-  }, [userData, navigate]);
+  }, [userData]);
 
   const onSubmit: SubmitHandler<ILoginFormValues> = async (values) => {
     setSubmitting(true);

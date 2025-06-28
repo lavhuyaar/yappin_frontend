@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axiosInstance } from "../api/axiosInstance";
@@ -22,6 +22,7 @@ interface IRegisterFormValues {
 
 const Register = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,8 +37,9 @@ const Register = () => {
     try {
       await axiosInstance.post("/user/register", values);
       toast.dismiss();
-      toast.success("Profile created successfully!");
+      toast.success("Profile created successfully!", { autoClose: 4000 });
       reset();
+      navigate("/login");
     } catch (error) {
       handleAxiosError(error, "Failed to register!");
     } finally {

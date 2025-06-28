@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import useChats from "../hooks/useChats";
+
 import { axiosInstance } from "../api/axiosInstance";
 import { handleAxiosError } from "../utils/handleAxiosError";
 
@@ -19,20 +21,31 @@ const MessageInput: React.FC<IMessageInputProps> = ({
   const [valueValidator, setValueValidator] = useState<string>("");
   const [error, setError] = useState<string | undefined>(undefined);
 
+  const { refreshChats } = useChats();
+
   const textAreaOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
 
   //Ensures that an empty message is not sent by User
   useEffect(() => {
-    if (value.trim()) {
-      setValueValidator("");
-    } else {
-      setValueValidator("Message cannot be empty");
+    if (!valueValidator) return;
+
+    if (valueValidator) {
+      if (value.trim()) {
+        setValueValidator("");
+      }
     }
-  }, [value]);
+  }, [value, valueValidator]);
 
   const onSubmit = async () => {
+    // Ensures that User only sees the validation after he tries to submit empty message
+    if (!value.trim()) {
+      setValueValidator("Message cannot be empty");
+      return;
+    }
+
+    // Prevents User from submitting message if message is empty
     if (valueValidator) return;
 
     setSubmitting(true);
@@ -45,6 +58,7 @@ const MessageInput: React.FC<IMessageInputProps> = ({
       getUpdatedChat(); //Gets the updated chat
       setValue(""); //Resets textarea
       setError(undefined);
+      refreshChats(); //Ensures refreshed Chats list
     } catch (err) {
       handleAxiosError(err, "Failed to send message", setError, false);
     } finally {
@@ -59,13 +73,14 @@ const MessageInput: React.FC<IMessageInputProps> = ({
   // };
 
   return (
-    <div className="flex w-full items-start gap-4 mt-10 justify-end p-2 mb-4">
+    <div className="flex w-full items-start gap-2 mt-10 justify-end p-2 mb-4">
       <div className="w-full flex flex-col">
         <textarea
           name="message"
           id="message"
           className="text-text-primary border-2 border-primary-hover/10 rounded-md w-full p-2 min-h-[100px] resize-none focus:outline-none message-input"
           onChange={textAreaOnChange}
+          placeholder="Your message..."
           // onKeyDown={onPressEnter}
           disabled={submitting}
           value={value}
