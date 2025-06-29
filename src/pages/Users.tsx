@@ -53,9 +53,8 @@ const Users = () => {
         <main className="text-text-primary p-3 sm:p-6">
           <h2 className="text-3xl text-primary mb-4">People to Explore</h2>
 
-          <section className="flex flex-col gap-3 h-[75vh] overflow-auto chat">
-            {users &&
-              users.length > 0 &&
+          <section className=" flexflex-col gap-3 h-[75vh] overflow-auto chat">
+            {users && users.length > 0 ? (
               users.map((user) => (
                 <div
                   key={user?.id}
@@ -80,7 +79,12 @@ const Users = () => {
                     </span>
                   </NavLink>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className="flexflex-col gap-3 h-[75vh]">
+                <h3>No other users found :(</h3>
+              </div>
+            )}
           </section>
         </main>
       ) : (
