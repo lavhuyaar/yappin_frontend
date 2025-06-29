@@ -78,7 +78,7 @@ const Header = () => {
                       toast.success("User logged out successfully!");
                     }}
                     title="Log Out"
-                    className="cursor-pointer text-text-primary px-2 md:px-4  w-full font-semibold text-start py-2 rounded-b-lg hover:bg-red-700/30 transition"
+                    className="cursor-pointer text-text-primary px-2 md:px-4 w-full font-semibold text-start py-2 rounded-b-lg hover:bg-red-700/30 transition"
                   >
                     Log Out
                   </button>
@@ -88,7 +88,7 @@ const Header = () => {
           ) : (
             <NavLink
               to="/login"
-              className="cursor-pointer text-primary-txt px-2 md:px-4 font-semibold py-2 rounded-lg hover:bg-primary-hover transition"
+              className="cursor-pointer text-primary-txt text-lg px-2 md:px-4 font-semibold py-2 rounded-lg hover:bg-primary-hover transition"
             >
               Login
             </NavLink>
