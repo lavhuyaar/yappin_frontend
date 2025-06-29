@@ -111,7 +111,7 @@ const Profile = () => {
 
           <div className="self-center relative">
             <img
-              title="Change Profile picture"
+              title="Change Profile Picture"
               onClick={() => fileInputRef.current?.click()}
               src={
                 profilePicture instanceof File
@@ -126,7 +126,7 @@ const Profile = () => {
             <button
               type="button"
               onClick={removeProfilePicture}
-              title="Remove Profile picture"
+              title="Remove Profile Picture"
               className="bg-red-700 rounded-full cursor-pointer absolute bottom-6 -right-0 p-0.5 text-xl text-white"
             >
               <RxCross2 />
