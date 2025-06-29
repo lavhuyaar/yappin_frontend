@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Chats from "../pages/Chats";
 import Users from "../pages/Users";
+import Profile from "../pages/Profile";
 import PageNotFound from "../pages/PageNotFound";
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/chats" element={<Chats />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

@@ -90,7 +90,9 @@ const ChatSection = ({
           sectionToShow === SECTIONS_TO_SHOW.CHAT_BOX ? "flex" : "hidden"
         } w-full md:flex md:w-2/3 h-[80vh] flex-col items-center justify-center`}
       >
-        <h3 className="text-center text-xl text-red-600 font-semibold">{error}</h3>
+        <h3 className="text-center text-xl text-red-600 font-semibold">
+          {error}
+        </h3>
         <button
           onClick={refreshChat}
           className="mt-2 text-md cursor-pointer font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
@@ -163,7 +165,7 @@ const ChatSection = ({
                 >
                   <img
                     className="!size-[30px] mt-1 rounded-full shrink-0 bg-background object-cover object-center"
-                    src={chat?.userB?.profilePicture ?? "/blank-pfp.webp"}
+                    src={message?.sender?.profilePicture ?? "/blank-pfp.webp"}
                   />
                   <div
                     className={`break-all rounded-lg py-2 px-3 ${

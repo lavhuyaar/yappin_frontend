@@ -37,7 +37,7 @@ const Header = () => {
                   <img
                     src={userData?.profilePicture ?? "/blank-pfp.webp"}
                     alt="Menu"
-                    className="w-[30px] md:w-[40px] rounded-full object-center object-cover"
+                    className="size-[30px] md:size-[40px] rounded-full shrink-0 object-center object-cover"
                   />
 
                   <MdKeyboardArrowDown className="text-2xl" />

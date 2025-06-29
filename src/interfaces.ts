@@ -2,7 +2,7 @@ export interface IUser {
   id: string;
   firstName: string;
   lastName: string;
-  profilePicture: string;
+  profilePicture?: string;
   username: string;
 }
 export interface IMessage {

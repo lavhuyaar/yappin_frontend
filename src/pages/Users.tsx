@@ -64,7 +64,7 @@ const Users = () => {
                   <img
                     src={user?.profilePicture ?? "/blank-pfp.webp"}
                     alt=""
-                    className="w-[45px] sm:w-[60px] object-center object-cover rounded-full"
+                    className="size-[45px] sm:size-[60px] object-center object-cover rounded-full"
                   />
                   <div className="flex flex-col w-3/5 break-all">
                     <h3 className="text-lg sm:text-xl font-semibold">{`${user?.firstName} ${user?.lastName}`}</h3>

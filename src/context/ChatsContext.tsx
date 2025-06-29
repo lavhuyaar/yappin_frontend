@@ -29,7 +29,7 @@ export const ChatsProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await axiosInstance.get("/chats");
       setChats(response.data?.chats);
     } catch (err) {
-      handleAxiosError(err, "Failed to get chats!", setError, false);
+      handleAxiosError(err, "Failed to get chats!", setError, true);
     } finally {
       setLoading(false);
     }
