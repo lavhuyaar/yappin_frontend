@@ -65,7 +65,10 @@ const Login = () => {
             </h2>
             <button
               className="text-md cursor-pointer font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
-              onClick={logoutUser}
+              onClick={() => {
+                logoutUser();
+                toast.success("User logged out successfully!");
+              }}
             >
               Logout
             </button>

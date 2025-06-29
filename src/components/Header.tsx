@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
+import { toast } from "react-toastify";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 import useAuth from "../hooks/useAuth";
@@ -55,7 +56,7 @@ const Header = () => {
                   >
                     Edit Profile
                   </NavLink>
-                    <NavLink
+                  <NavLink
                     to="/chats"
                     title="My Chats"
                     className="cursor-pointer text-text-primary px-2 md:px-4 font-semibold py-2  hover:bg-primary-hover/20 transition"
@@ -72,7 +73,10 @@ const Header = () => {
                   </NavLink>
 
                   <button
-                    onClick={logoutUser}
+                    onClick={() => {
+                      logoutUser();
+                      toast.success("User logged out successfully!");
+                    }}
                     title="Log Out"
                     className="cursor-pointer text-text-primary px-2 md:px-4  w-full font-semibold text-start py-2 rounded-b-lg hover:bg-red-700/30 transition"
                   >
